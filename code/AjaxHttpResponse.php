@@ -1,4 +1,9 @@
 <?php
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
+use SilverStripe\CMS\Controllers\Controller;
+use SilverStripe\View\ViewableData;
+
 /**
  * Special case of HTTP response that adds some helpers for ajax and
  * automatically handles the construction of the response.
@@ -7,7 +12,7 @@
  * @date 04.03.2014
  * @package silverstripe-ajax
  */
-class AjaxHTTPResponse extends SS_HTTPResponse
+class AjaxHTTPResponse extends HTTPResponse
 {
 
     const EVENTS_KEY  = 'events';
@@ -25,14 +30,14 @@ class AjaxHTTPResponse extends SS_HTTPResponse
     /** @var array - Key/val store of objects a region can be rendered against. DEFAULT=current controller */
     protected $renderContexts = array();
 
-    /** @var SS_HTTPRequest */
+    /** @var HTTPRequest */
     protected $request = null;
 
 
     /**
      * Create a new HTTP response
      *
-     * @param SS_HTTPRequest $request - The corresponding request object
+     * @param HTTPRequest $request - The corresponding request object
      * @param string $body - The body of the response
      * @param int $statusCode - The numeric status code - 200, 404, etc
      * @param string $statusDescription - The text to be given alongside the status code.
@@ -40,7 +45,7 @@ class AjaxHTTPResponse extends SS_HTTPResponse
      */
     public function __construct($request = null, $body = null, $statusCode = null, $statusDescription = null)
     {
-        if ($request && $request instanceof SS_HTTPRequest) {
+        if ($request && $request instanceof HTTPRequest) {
             $this->request = $request;
         } elseif (is_string($request)) {
             // respond intelligently if someone uses the parent constructor syntax

@@ -1,4 +1,8 @@
 <?php
+
+use SilverStripe\Core\Extension;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Core\Injector\Injector;
 /**
  * Catches errors and returns an AjaxHTTPResponse.
  * Could also add some helpers to controller for ajax functionality.
@@ -15,9 +19,9 @@ class AjaxControllerExtension extends Extension
 
     /**
      * @param int            $errorCode
-     * @param SS_HTTPRequest $request
+     * @param HTTPRequest $request
      */
-    public function onBeforeHTTPError($errorCode, SS_HTTPRequest $request)
+    public function onBeforeHTTPError($errorCode, HTTPRequest $request)
     {
         // TODO: This should probably prevent the error page from generating in ajax and possibly return a json response
         // throw new SS_HTTPResponse_Exception($errorMessage, $errorCode);
