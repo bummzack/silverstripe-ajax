@@ -1,7 +1,8 @@
 <?php
+
+use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
-use SilverStripe\CMS\Controllers\Controller;
 use SilverStripe\View\ViewableData;
 
 /**

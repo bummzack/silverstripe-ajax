@@ -34,7 +34,14 @@ class AjaxControllerExtension extends Extension
     public function getAjaxResponse()
     {
         if (!isset($this->ajaxResponse)) {
-            $this->ajaxResponse = Injector::inst()->create('AjaxHTTPResponse', $this->owner->getRequest());
+            $request = null;
+            if ($this->owner instanceof \SilverStripe\Control\HasRequestHandler) {
+                $request = $this->owner->getRequestHandler()->getRequest();
+            } else if ($this->owner instanceof \SilverStripe\Control\Controller) {
+                $request = $this->owner->getRequest();
+            }
+
+            $this->ajaxResponse = Injector::inst()->create('AjaxHTTPResponse', $request);
         }
         return $this->ajaxResponse;
     }
